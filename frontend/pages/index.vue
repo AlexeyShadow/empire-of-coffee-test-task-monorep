@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AuthForm from "~/components/AuthForm.vue";
+import LoginForm from "~/components/LoginForm.vue";
 
 useSeoMeta({
   title: "Main",
@@ -8,5 +8,5 @@ useSeoMeta({
 </script>
 
 <template>
-  <AuthForm />
+  <LoginForm />
 </template>

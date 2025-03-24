@@ -1,7 +1,5 @@
 <template>
-  <header>
-    <NuxtLink to="/profile">fwefew</NuxtLink>
-  </header>
+  <header></header>
   <main>
     <slot />
   </main>
