@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "@empire-of-coffee-test-task-monorep/front",
   "private": true,
   "type": "module",
   "scripts": {

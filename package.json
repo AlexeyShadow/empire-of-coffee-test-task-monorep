@@ -1,0 +1,17 @@
+{
+  "name": "empire-of-coffee-test-task-monorep",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "backend:dev": "npm run dev --workspace=./backend",
+    "frontend:dev": "npm run dev --workspace=./frontend"
+  },
+  "workspaces": [
+    "./backend",
+    "./frontend"
+  ],
+  "author": "Alexey Shadow",
+  "license": "ISC"
+}
