@@ -9,9 +9,24 @@ const loading = ref<boolean>(false);
 async function handleLogin(): Promise<void> {
   loading.value = true;
   error.value = null;
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  error.value = "Введены неверные данные авторизации. Попробуйте ещё раз";
-  loading.value = false;
+
+  try {
+    const data = await $fetch("http://localhost:3001/login", {
+      method: "POST",
+      body: { username: username.value, password: password.value },
+    });
+
+    console.log("Успешный вход:", data);
+
+    // TODO: Сохранить токен в cookie
+
+    navigateTo("/profile");
+  } catch (err: any) {
+    console.error(err);
+    error.value = err.data?.message || "Произошла ошибка при входе.";
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
 
@@ -21,12 +36,7 @@ async function handleLogin(): Promise<void> {
     <form v-on:submit.prevent="handleLogin" class="login-form">
       <div class="form-group">
         <label for="username">Логин (Email):</label>
-        <input
-          v-model="username"
-          type="text"
-          placeholder="Введите ваш email"
-          required
-        />
+        <input v-model="username" type="text" placeholder="Введите ваш email" />
       </div>
       <div class="form-group">
         <label for="password">Пароль:</label>
@@ -34,7 +44,6 @@ async function handleLogin(): Promise<void> {
           v-model="password"
           type="password"
           placeholder="Введите ваш пароль"
-          required
         />
       </div>
 

@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "date_created": "01.01.2022",
+    "name": "Эфиопия Йиргачеффе",
+    "price": 250,
+    "region": "Эфиопия",
+    "roastLevel": "Лёгкая",
+    "status": "в наличии"
+  },
+  {
+    "id": 2,
+    "date_created": "05.02.2022",
+    "name": "Бразилия Сантос",
+    "price": 200,
+    "region": "Бразилия",
+    "roastLevel": "Средняя",
+    "status": "в наличии"
+  },
+  {
+    "id": 3,
+    "date_created": "10.02.2022",
+    "name": "Колумбия Supremo",
+    "price": 300,
+    "region": "Колумбия",
+    "roastLevel": "Средняя",
+    "status": "под заказ"
+  },
+  {
+    "id": 4,
+    "date_created": "15.02.2022",
+    "name": "Кения AA",
+    "price": 350,
+    "region": "Кения",
+    "roastLevel": "Тёмная",
+    "status": "в наличии"
+  },
+  {
+    "id": 5,
+    "date_created": "20.02.2022",
+    "name": "Эфиопия Сидама",
+    "price": 280,
+    "region": "Эфиопия",
+    "roastLevel": "Лёгкая",
+    "status": "не доступен"
+  },
+  {
+    "id": 6,
+    "date_created": "05.04.2022",
+    "name": "Гватемала Antigua",
+    "price": 320,
+    "region": "Гватемала",
+    "roastLevel": "Средняя",
+    "status": "в наличии"
+  },
+  {
+    "id": 7,
+    "date_created": "02.08.2022",
+    "name": "Коста-Рика Тарасу",
+    "price": 290,
+    "region": "Коста-Рика",
+    "roastLevel": "Лёгкая",
+    "status": "под заказ"
+  },
+  {
+    "id": 8,
+    "date_created": "27.10.2022",
+    "name": "Вьетнам Робуста",
+    "price": 180,
+    "region": "Вьетнам",
+    "roastLevel": "Тёмная",
+    "status": "в наличии"
+  },
+  {
+    "id": 9,
+    "date_created": "15.02.2023",
+    "name": "Эфиопия Ганджи",
+    "price": 260,
+    "region": "Эфиопия",
+    "roastLevel": "Лёгкая",
+    "status": "не доступен"
+  },
+  {
+    "id": 10,
+    "date_created": "09.07.2023",
+    "name": "Колумбия Excelso",
+    "price": 310,
+    "region": "Колумбия",
+    "roastLevel": "Средняя",
+    "status": "в наличии"
+  },
+  {
+    "id": 11,
+    "date_created": "18.10.2023",
+    "name": "Кения AB",
+    "price": 330,
+    "region": "Кения",
+    "roastLevel": "Тёмная",
+    "status": "под заказ"
+  },
+  {
+    "id": 12,
+    "date_created": "03.03.2024",
+    "name": "Бразилия Бурбон",
+    "price": 220,
+    "region": "Бразилия",
+    "roastLevel": "Средняя",
+    "status": "в наличии"
+  },
+  {
+    "id": 13,
+    "date_created": "05.17.2024",
+    "name": "Эфиопия Иргачеффе",
+    "price": 270,
+    "region": "Эфиопия",
+    "roastLevel": "Лёгкая",
+    "status": "не доступен"
+  },
+  {
+    "id": 14,
+    "date_created": "08.12.2024",
+    "name": "Гватемала Уэуэтенанго",
+    "price": 340,
+    "region": "Гватемала",
+    "roastLevel": "Средняя",
+    "status": "в наличии"
+  },
+  {
+    "id": 15,
+    "date_created": "11.13.2024",
+    "name": "Коста-Рика Гресия",
+    "price": 300,
+    "region": "Коста-Рика",
+    "roastLevel": "Лёгкая",
+    "status": "под заказ"
+  },
+  {
+    "id": 16,
+    "date_created": "12.12.2024",
+    "name": "Вьетнам Аробica",
+    "price": 200,
+    "region": "Вьетнам",
+    "roastLevel": "Тёмная",
+    "status": "в наличии"
+  },
+  {
+    "id": 17,
+    "date_created": "01.02.2025",
+    "name": "Эфиопия Лекемти",
+    "price": 290,
+    "region": "Эфиопия",
+    "roastLevel": "Лёгкая",
+    "status": "не доступен"
+  },
+  {
+    "id": 18,
+    "date_created": "01.22.2025",
+    "name": "Колумбия Сан-Анастасио",
+    "price": 320,
+    "region": "Колумбия",
+    "roastLevel": "Средняя",
+    "status": "в наличии"
+  },
+  {
+    "id": 19,
+    "date_created": "02.19.2025",
+    "name": "Кения AA",
+    "price": 360,
+    "region": "Кения",
+    "roastLevel": "Тёмная",
+    "status": "под заказ"
+  },
+  {
+    "id": 20,
+    "date_created": "03.25.2025",
+    "name": "Бразилия Мейо де Минас",
+    "price": 240,
+    "region": "Бразилия",
+    "roastLevel": "Средняя",
+    "status": "в наличии"
+  }
+]
