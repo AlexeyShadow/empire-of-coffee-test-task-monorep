@@ -22,10 +22,7 @@ const loginHandler: RequestHandler = (req: Request, res: Response): void => {
 
   const users = getUsers();
 
-  // Ищем пользователя с совпадающим username
   const user = users?.find((u) => u.credentials.username === username);
-
-  console.log(getPasswordHash(password), user);
 
   if (
     user &&
@@ -33,8 +30,6 @@ const loginHandler: RequestHandler = (req: Request, res: Response): void => {
     user.active
   ) {
     const token = generateToken(user.username);
-    console.log(token);
-
     res.json({ message: "Успешный вход!", token });
     return;
   } else {
@@ -43,7 +38,6 @@ const loginHandler: RequestHandler = (req: Request, res: Response): void => {
   }
 };
 
-// Маршруты
 app.post("/login", loginHandler);
 
 app.listen(PORT, () => {

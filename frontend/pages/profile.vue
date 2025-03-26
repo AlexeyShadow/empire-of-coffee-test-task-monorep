@@ -5,6 +5,11 @@ useSeoMeta({
   title: "Profile",
   description: "Profile",
 });
+
+function handleLogout(): void {
+  useCookie("authToken").value = null;
+  navigateTo("/");
+}
 </script>
 
 <script lang="ts">
@@ -18,7 +23,7 @@ definePageMeta({
     <header class="header">
       <div class="header__content">
         <h1 class="header__title">Профиль</h1>
-        <button class="button">Выйти</button>
+        <button class="button" v-on:click="handleLogout">Выйти</button>
       </div>
     </header>
 
