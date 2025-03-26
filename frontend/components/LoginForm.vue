@@ -18,7 +18,7 @@ async function handleLogin(): Promise<void> {
 
     console.log("Успешный вход:", data);
 
-    // TODO: Сохранить токен в cookie
+    useCookie("authToken").value = data?.token;
 
     navigateTo("/profile");
   } catch (err: any) {

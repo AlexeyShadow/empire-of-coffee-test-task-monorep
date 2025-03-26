@@ -7,6 +7,12 @@ useSeoMeta({
 });
 </script>
 
+<script lang="ts">
+definePageMeta({
+  middleware: ["auth"],
+});
+</script>
+
 <template>
   <div class="page">
     <header class="header">
