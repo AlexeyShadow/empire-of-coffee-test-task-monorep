@@ -1,8 +1,8 @@
 import express, { Request, Response, RequestHandler } from "express";
 import cors from "cors";
-import fs from "fs";
-import path from "path";
 import { getPasswordHash } from "./../utils/getPasswordHash";
+import { getUsers } from "./../utils/getUsers";
+import { generateToken } from "./../utils/generateToken";
 
 const app = express();
 const PORT = 3001;
@@ -12,24 +12,11 @@ const AUTHORIZATION_FALSE =
 app.use(express.json());
 app.use(cors());
 
-const usersFilePath = path.join(__dirname, "..", "data", "users.json");
-
-// TODO: вынести в utils
-function getUsers(): any[] {
-  try {
-    const data = fs.readFileSync(usersFilePath, "utf-8");
-    return JSON.parse(data);
-  } catch (error) {
-    console.error("Ошибка чтения:", error);
-    return [];
-  }
-}
-
 const loginHandler: RequestHandler = (req: Request, res: Response): void => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    res.status(400).json({ message: AUTHORIZATION_FALSE });
+    res.status(401).json({ message: AUTHORIZATION_FALSE });
     return;
   }
 
@@ -40,7 +27,11 @@ const loginHandler: RequestHandler = (req: Request, res: Response): void => {
 
   console.log(getPasswordHash(password), user);
 
-  if (user && user.credentials.passphrase === getPasswordHash(password)) {
+  if (
+    user &&
+    user.credentials.passphrase === getPasswordHash(password) &&
+    user.active
+  ) {
     const token = generateToken(user.username);
     console.log(token);
 
@@ -52,11 +43,7 @@ const loginHandler: RequestHandler = (req: Request, res: Response): void => {
   }
 };
 
-function generateToken(username: string): string {
-  // TODO: Добавить генерацию и отправку JWT
-  return `mock_token_for_${username}`;
-}
-
+// Маршруты
 app.post("/login", loginHandler);
 
 app.listen(PORT, () => {
