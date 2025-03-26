@@ -1,5 +1,17 @@
 <script setup lang="ts">
-const { data: coffeeData } = await useFetch("/api/coffee");
+import Spinner from "~/components/Spinner.vue";
+import { ref, onMounted } from "vue";
+
+// Попробуем имитировать загрузку данных с сервера
+const loading = ref<boolean>(true);
+const coffeeData = ref<any[] | null>(null);
+onMounted(() => {
+  setTimeout(async () => {
+    const { data } = await useFetch("/api/coffee");
+    coffeeData.value = data.value;
+    loading.value = false;
+  }, 1500);
+});
 
 useSeoMeta({
   title: "Profile",
@@ -33,8 +45,13 @@ definePageMeta({
       </section>
 
       <section class="profile-container">
+        <div v-if="loading" class="spinner">
+          <Spinner />
+          <p>Загрузка данных...</p>
+        </div>
         <section class="coffee-table" v-if="coffeeData?.length">
           <h3>Список сделанных заказов</h3>
+
           <!-- TODO: Переделать таблицу на приличный вывод с фильтрацией -->
           <table>
             <thead>
@@ -237,5 +254,12 @@ $border-radius: 5px;
       }
     }
   }
+}
+
+.spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 </style>
