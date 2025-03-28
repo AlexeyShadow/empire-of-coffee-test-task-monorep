@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import Spinner from "~/components/Spinner.vue";
 import { ref, onMounted } from "vue";
+import { useCoffeeStore } from "~/stores/coffeeStore";
 
+const store = useCoffeeStore();
 // Попробуем имитировать загрузку данных с сервера
 const loading = ref<boolean>(true);
 const coffeeData = ref<any[] | null>(null);
@@ -10,6 +12,7 @@ onMounted(() => {
     const { data } = await useFetch("/api/coffee");
     coffeeData.value = data.value;
     loading.value = false;
+    console.log(store.strPinia);
   }, 1500);
 });
 
@@ -17,7 +20,6 @@ useSeoMeta({
   title: "Profile",
   description: "Profile",
 });
-
 function handleLogout(): void {
   useCookie("authToken").value = null;
   navigateTo("/");
