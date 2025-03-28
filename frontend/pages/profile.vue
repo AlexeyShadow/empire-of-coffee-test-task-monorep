@@ -11,8 +11,12 @@ onMounted(() => {
   setTimeout(async () => {
     const { data } = await useFetch("/api/coffee");
     coffeeData.value = data.value;
+    if (coffeeData.value) {
+      store.setCoffeeList(data.value);
+    }
     loading.value = false;
     console.log(store.strPinia);
+    console.log(store.coffeeList);
   }, 1500);
 });
 
