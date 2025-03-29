@@ -4,9 +4,10 @@ import type { CoffeeItem, Filter } from "~/types/coffeeTypes";
 
 export const useCoffeeStore = defineStore("coffee", () => {
   const coffeeList = ref<CoffeeItem[]>([]);
-  // Заложим возможность расширить фильтры и тип Filter
   const filters = ref<Filter>({
     region: "",
+    dateFrom: "",
+    dateTo: "",
   });
 
   function setCoffeeList(data: CoffeeItem[]): void {
@@ -17,11 +18,29 @@ export const useCoffeeStore = defineStore("coffee", () => {
     return !filterRegion || item.region === filterRegion;
   }
 
+  function itemMatchesDate(
+    item: CoffeeItem,
+    from?: string,
+    to?: string
+  ): boolean {
+    const itemDate = new Date(item.date_created);
+    const dateFrom = from ? new Date(from) : null;
+    const dateTo = to ? new Date(to) : null;
+
+    if (dateFrom && itemDate.getTime() < dateFrom.getTime()) return false;
+    if (dateTo && itemDate.getTime() > dateTo.getTime()) return false;
+
+    return true;
+  }
+
   const filteredCoffee = computed(() => {
     const currentFilters = filters.value;
 
     return coffeeList.value.filter((item) => {
-      return itemMatchesRegion(item, currentFilters.region);
+      return (
+        itemMatchesRegion(item, currentFilters.region) &&
+        itemMatchesDate(item, currentFilters.dateFrom, currentFilters.dateTo)
+      );
     });
   });
 
@@ -31,5 +50,6 @@ export const useCoffeeStore = defineStore("coffee", () => {
     filters,
     itemMatchesRegion,
     filteredCoffee,
+    itemMatchesDate,
   };
 });

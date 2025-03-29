@@ -61,6 +61,15 @@ definePageMeta({
             </option>
           </select>
         </div>
+        <div class="filter-group">
+          <label>от:</label>
+          <input type="date" v-model="store.filters.dateFrom" class="select" />
+        </div>
+
+        <div class="filter-group">
+          <label>до:</label>
+          <input type="date" v-model="store.filters.dateTo" class="select" />
+        </div>
       </section>
 
       <section class="profile-container">

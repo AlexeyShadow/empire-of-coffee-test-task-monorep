@@ -8,6 +8,8 @@ export type CoffeeItem = {
   status: string;
 };
 
-export type Filter = {
+export interface Filter {
   region: string;
-};
+  dateFrom?: string;
+  dateTo?: string;
+}
