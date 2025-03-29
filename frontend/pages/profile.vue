@@ -2,21 +2,18 @@
 import Spinner from "~/components/Spinner.vue";
 import { ref, onMounted } from "vue";
 import { useCoffeeStore } from "~/stores/coffeeStore";
+import type { CoffeeItem } from "~/types/coffeeTypes";
 
 const store = useCoffeeStore();
-// Попробуем имитировать загрузку данных с сервера
+// Попробуем имитировать загрузку данных с сервера используя setTimeout
 const loading = ref<boolean>(true);
-const coffeeData = ref<any[] | null>(null);
 onMounted(() => {
   setTimeout(async () => {
-    const { data } = await useFetch("/api/coffee");
-    coffeeData.value = data.value;
-    if (coffeeData.value) {
+    const { data } = await useFetch<CoffeeItem[]>("/api/coffee");
+    if (data && data.value) {
       store.setCoffeeList(data.value);
     }
     loading.value = false;
-    console.log(store.strPinia);
-    console.log(store.coffeeList);
   }, 1500);
 });
 
@@ -47,7 +44,23 @@ definePageMeta({
 
     <main class="content">
       <section class="filters">
-        <p>TODO: Добавть фильтры</p>
+        <div class="filter-group">
+          <label>Регион:</label>
+          <select class="select" v-model="store.filters.region">
+            <option value="">Все</option>
+            <option
+              v-for="region in [
+                ...new Set(
+                  store.coffeeList.map((coffeeItem) => coffeeItem.region)
+                ),
+              ]"
+              :key="region"
+              :value="region"
+            >
+              {{ region }}
+            </option>
+          </select>
+        </div>
       </section>
 
       <section class="profile-container">
@@ -55,34 +68,34 @@ definePageMeta({
           <Spinner />
           <p>Загрузка данных...</p>
         </div>
-        <section class="coffee-table" v-if="coffeeData?.length">
+        <section class="coffee-table" v-if="store.filteredCoffee.length">
           <h3>Список сделанных заказов</h3>
-
-          <!-- TODO: Переделать таблицу на приличный вывод с фильтрацией -->
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Название</th>
-                <th>Регион</th>
-                <th>Обжарка</th>
-                <th>Цена</th>
-                <th>Доставка</th>
-                <th>Дата</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="coffee in coffeeData" :key="coffee.id">
-                <td>{{ coffee.id }}</td>
-                <td>{{ coffee.name }}</td>
-                <td>{{ coffee.region }}</td>
-                <td>{{ coffee.roastLevel }}</td>
-                <td>{{ coffee.price }} руб.</td>
-                <td>{{ coffee.status }}</td>
-                <td>{{ coffee.date_created }}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Название</th>
+                  <th>Регион</th>
+                  <th>Обжарка</th>
+                  <th>Цена</th>
+                  <th>Доставка</th>
+                  <th>Дата</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="coffee in store.filteredCoffee" :key="coffee.id">
+                  <td>{{ coffee.id }}</td>
+                  <td>{{ coffee.name }}</td>
+                  <td>{{ coffee.region }}</td>
+                  <td>{{ coffee.roastLevel }}</td>
+                  <td>{{ coffee.price }} руб.</td>
+                  <td>{{ coffee.status }}</td>
+                  <td>{{ coffee.date_created }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
       </section>
     </main>
@@ -148,6 +161,20 @@ $border-radius: 5px;
   border-radius: $border-radius;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
+  display: flex;
+
+  .filter-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 10px;
+
+    label {
+      font-weight: 500;
+      color: #333;
+    }
+  }
 }
 
 .profile-container {
@@ -197,6 +224,11 @@ $border-radius: 5px;
   h3 {
     margin-bottom: 10px;
     font-size: 1.2em;
+  }
+
+  .table-container {
+    height: calc(100vh - 400px);
+    overflow-y: scroll;
   }
 
   table {
@@ -267,5 +299,22 @@ $border-radius: 5px;
   flex-direction: column;
   align-items: center;
   gap: 8px;
+}
+
+.select {
+  min-width: 150px;
+  padding: 8px 12px;
+  margin-left: 8px;
+  border: 1px solid #ccc;
+  border-radius: $border-radius;
+  background-color: white;
+  font-size: 1em;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
 }
 </style>
