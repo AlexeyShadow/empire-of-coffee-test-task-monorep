@@ -5,8 +5,8 @@ import { useCoffeeStore } from "~/stores/coffeeStore";
 import type { CoffeeItem } from "~/types/coffeeTypes";
 
 const store = useCoffeeStore();
-// Попробуем имитировать загрузку данных с сервера используя setTimeout
 const loading = ref<boolean>(true);
+
 onMounted(() => {
   setTimeout(async () => {
     const { data } = await useFetch<CoffeeItem[]>("/api/coffee");
@@ -21,6 +21,7 @@ useSeoMeta({
   title: "Profile",
   description: "Profile",
 });
+
 function handleLogout(): void {
   useCookie("authToken").value = null;
   navigateTo("/");
@@ -70,6 +71,12 @@ definePageMeta({
           <label>до:</label>
           <input type="date" v-model="store.filters.dateTo" class="select" />
         </div>
+
+        <div class="filter-group">
+          <button class="reset-button" @click="store.resetFilters">
+            Сбросить фильтры
+          </button>
+        </div>
       </section>
 
       <section class="profile-container">
@@ -118,7 +125,6 @@ $primary-dark: #0056b3;
 $header-bg: #f0f4ff;
 $button-shadow-color: rgba(0, 123, 255, 0.3);
 $button-shadow-hover-color: rgba(0, 123, 255, 0.4);
-
 $page-max-width: 1200px;
 $border-radius: 5px;
 
@@ -142,7 +148,6 @@ $border-radius: 5px;
     max-width: $page-max-width;
     margin: 0 auto;
     padding: 0 20px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -171,6 +176,7 @@ $border-radius: 5px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
   display: flex;
+  align-items: center;
 
   .filter-group {
     margin-bottom: 15px;
@@ -182,6 +188,10 @@ $border-radius: 5px;
     label {
       font-weight: 500;
       color: #333;
+    }
+
+    &:last-child {
+      margin-left: auto;
     }
   }
 }
@@ -223,6 +233,25 @@ $border-radius: 5px;
       darken($primary-dark, 5%)
     );
     box-shadow: 0 4px 8px $button-shadow-hover-color;
+  }
+}
+
+.reset-button {
+  padding: 8px 16px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition:
+    background-color 0.3s,
+    box-shadow 0.3s;
+  box-shadow: 0 2px 5px rgba(244, 67, 54, 0.3);
+
+  &:hover {
+    background-color: #d32f2f;
+    box-shadow: 0 4px 8px rgba(244, 67, 54, 0.4);
   }
 }
 

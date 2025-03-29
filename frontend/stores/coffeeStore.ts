@@ -44,12 +44,19 @@ export const useCoffeeStore = defineStore("coffee", () => {
     });
   });
 
+  function resetFilters(): void {
+    filters.value = {
+      region: "",
+      dateFrom: "",
+      dateTo: "",
+    };
+  }
+
   return {
     coffeeList,
     setCoffeeList,
     filters,
-    itemMatchesRegion,
     filteredCoffee,
-    itemMatchesDate,
+    resetFilters,
   };
 });
