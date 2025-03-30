@@ -119,16 +119,6 @@ definePageMeta({
 </template>
 
 <style scoped lang="scss">
-// variables
-$primary-color: #007bff;
-$primary-dark: #0056b3;
-$header-bg: #f0f4ff;
-$button-shadow-color: rgba(0, 123, 255, 0.3);
-$button-shadow-hover-color: rgba(0, 123, 255, 0.4);
-$page-max-width: 1200px;
-$border-radius: 5px;
-
-// styles
 .page {
   display: flex;
   flex-direction: column;

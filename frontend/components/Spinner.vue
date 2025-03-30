@@ -6,8 +6,8 @@
 .spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #007bff;
+  border: 4px solid $shadow-color;
+  border-top: 4px solid $primary-gradient-start;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
