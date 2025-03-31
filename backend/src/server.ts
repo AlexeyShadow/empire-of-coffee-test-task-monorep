@@ -1,9 +1,9 @@
 import express, { Request, Response, RequestHandler } from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import { getPasswordHash } from "./../utils/getPasswordHash";
 import { getUsers } from "./../utils/getUsers";
 import { generateToken } from "./../utils/generateToken";
-import cookieParser from "cookie-parser";
 import { addSession, removeSession } from "../data/sessions";
 
 const app = express();

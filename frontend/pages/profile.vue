@@ -10,6 +10,12 @@ useSeoMeta({
 });
 </script>
 
+<script lang="ts">
+definePageMeta({
+  middleware: ["auth"] // и да, можно массивом ["auth", "anotherMiddleware"]
+})
+</script>
+
 <template>
   <div class="page">
     <ProfileHeader />

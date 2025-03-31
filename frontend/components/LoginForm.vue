@@ -30,12 +30,6 @@ async function handleLogin(): Promise<void> {
 }
 </script>
 
-<script lang="ts">
-definePageMeta({
-  middleware: ["auth"],
-});
-</script>
-
 <template>
   <div class="login-container">
     <h1>Вход в аккаунт</h1>
