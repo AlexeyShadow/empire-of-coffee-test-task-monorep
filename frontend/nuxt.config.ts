@@ -24,6 +24,7 @@ export default defineNuxtConfig({
         scss: {
           additionalData: `
             @import "@/assets/scss/variables";
+            @import "@/assets/scss/mixins";
           `,
         },
       },

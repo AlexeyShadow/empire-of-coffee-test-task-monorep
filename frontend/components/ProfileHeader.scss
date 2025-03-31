@@ -1,0 +1,27 @@
+.header {
+  width: 100%;
+  background-color: $header-bg;
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+
+  &__content {
+    width: 100%;
+    max-width: $page-max-width;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 2em;
+    color: $primary-dark;
+  }
+}
+
+.button {
+  @include button-base;
+  padding: 10px 20px;
+}

@@ -3,6 +3,7 @@ import cors from "cors";
 import { getPasswordHash } from "./../utils/getPasswordHash";
 import { getUsers } from "./../utils/getUsers";
 import { generateToken } from "./../utils/generateToken";
+import cookieParser from "cookie-parser";
 
 const app = express();
 const PORT = 3001;
@@ -11,6 +12,7 @@ const AUTHORIZATION_FALSE =
 
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 const loginHandler: RequestHandler = (req: Request, res: Response): void => {
   const { username, password } = req.body;
@@ -29,8 +31,12 @@ const loginHandler: RequestHandler = (req: Request, res: Response): void => {
     user.credentials.passphrase === getPasswordHash(password) &&
     user.active
   ) {
+    // Принимаем легенду, что у нас всё шифруется
+
     const token = generateToken(user.username);
-    res.json({ message: "Успешный вход!", token });
+    res.cookie("sessionId", token, { path: "/", httpOnly: true });
+
+    res.send({ message: "Login successful!" });
     return;
   } else {
     res.status(401).json({ message: AUTHORIZATION_FALSE });
