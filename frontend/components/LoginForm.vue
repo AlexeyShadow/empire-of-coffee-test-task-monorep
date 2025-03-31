@@ -16,15 +16,11 @@ async function handleLogin(): Promise<void> {
     const data = await $fetch("http://localhost:3001/login", {
       method: "POST",
       body: { username: username.value, password: password.value },
-
+      credentials: 'include'
     });
 
-    console.log(data);
-
-
-
-
     navigateTo("/profile");
+
   } catch (err: any) {
     console.error(err);
     error.value = err.data?.message || "Произошла ошибка при входе.";
@@ -32,6 +28,12 @@ async function handleLogin(): Promise<void> {
     loading.value = false;
   }
 }
+</script>
+
+<script lang="ts">
+definePageMeta({
+  middleware: ["auth"],
+});
 </script>
 
 <template>

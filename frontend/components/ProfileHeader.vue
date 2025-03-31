@@ -1,9 +1,19 @@
 <style scoped src="./ProfileHeader.scss" lang="scss"></style>
 
 <script setup lang="ts">
-const handleLogout = () => {
-    useCookie("authToken").value = null;
-    navigateTo("/");
+
+async function handleLogout(): Promise<void> {
+    try {
+        const data = await $fetch("http://localhost:3001/logout", {
+            method: "POST",
+            credentials: 'include'
+        });
+
+        navigateTo("/");
+
+    } catch (err: any) {
+        console.error(err);
+    }
 }
 </script>
 
