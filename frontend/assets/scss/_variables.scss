@@ -4,16 +4,20 @@ $primary-gradient-start: #007bff;
 $primary-gradient-end: #0056b3;
 $primary-gradient-hover-start: #0069d9;
 $primary-gradient-hover-end: #00408a;
-
-$text-color: #333;
-$label-color: #555;
-$border-color: #dcdcdc;
-$input-focus-border: $primary-color;
-$container-bg: #ffffff;
-$shadow-color: rgba(0, 0, 0, 0.1);
 $button-shadow-color: rgba(0, 123, 255, 0.3);
 $button-shadow-hover-color: rgba(0, 123, 255, 0.4);
 $disabled-bg: #b0c4de;
+$reset-button-gradient-start: #f44336;
+$reset-button-gradient-end: #d32f2f;
+$reset-button-shadow-color: rgba(244, 67, 54, 0.3);
+$reset-button-shadow-hover-color: rgba(244, 67, 54, 0.4);
+
+$text-color: #333;
+$label-color: #555;
+$border-color: #ddd;
+$input-focus-border: $primary-color;
+$container-bg: #fff;
+$shadow-color: rgba(0, 0, 0, 0.1);
 
 $error-bg: #ffebee;
 $error-text: #c62828;
@@ -22,5 +26,9 @@ $error-border: #f44336;
 $border-radius: 5px;
 $container-border-radius: 8px;
 $page-max-width: 1200px;
+
+$table-border-bottom-color: #eee;
+$table-th-bg-color: #f0f4ff;
+$table-tr-hover-color: #f9fafc;
 
 $header-bg: #f0f4ff;

@@ -2,7 +2,11 @@
 
 <script setup lang="ts">
 
-async function handleLogout(): Promise<void> {
+/**
+ * Функция отправляет даные сессии на сервер
+ * в случае успеха происходит завершение сессии редирект на страницу ввода данных аутентификации
+ */
+const handleLogout = async (): Promise<void> => {
     try {
         const data = await $fetch("http://localhost:3001/logout", {
             method: "POST",

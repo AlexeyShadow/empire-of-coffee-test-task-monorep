@@ -8,7 +8,11 @@ const password = ref<string>("");
 const error = ref<string | null>(null);
 const loading = ref<boolean>(false);
 
-async function handleLogin(): Promise<void> {
+/**
+ * Функция отправляет даные из формы на сервер
+ * в случае успеха происходит редирект на страницу профайла
+ */
+const handleLogin = async (): Promise<void> => {
   loading.value = true;
   error.value = null;
 

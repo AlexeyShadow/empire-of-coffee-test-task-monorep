@@ -5,6 +5,7 @@ import type { CoffeeItem } from "~/types/coffeeTypes";
 const store = useCoffeeStore();
 const loading = ref<boolean>(true);
 
+// Имитируем задержку при получении данных
 onMounted(() => {
     setTimeout(async () => {
         const { data } = await useFetch<CoffeeItem[]>("/api/coffee");
@@ -17,7 +18,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <section class="profile-container">
+    <section class="container">
         <div v-if="loading" class="spinner">
             <Spinner />
             <p>Загрузка данных...</p>
@@ -39,13 +40,13 @@ onMounted(() => {
                     </thead>
                     <tbody>
                         <tr v-for="coffee in store.filteredCoffee" :key="coffee.id">
-                            <td>{{ coffee.id }}</td>
-                            <td>{{ coffee.name }}</td>
-                            <td>{{ coffee.region }}</td>
-                            <td>{{ coffee.roastLevel }}</td>
-                            <td>{{ coffee.price }} руб.</td>
-                            <td>{{ coffee.status }}</td>
-                            <td>{{ coffee.date_created }}</td>
+                            <td :data-label="'ID'">{{ coffee.id }}</td>
+                            <td :data-label="'Название'">{{ coffee.name }}</td>
+                            <td :data-label="'Регион'">{{ coffee.region }}</td>
+                            <td :data-label="'Обжарка'">{{ coffee.roastLevel }}</td>
+                            <td :data-label="'Цена'">{{ coffee.price }} руб.</td>
+                            <td :data-label="'Доставка'">{{ coffee.status }}</td>
+                            <td :data-label="'Дата'">{{ coffee.date_created }}</td>
                         </tr>
                     </tbody>
                 </table>

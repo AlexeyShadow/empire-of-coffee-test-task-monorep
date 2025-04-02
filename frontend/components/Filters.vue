@@ -30,10 +30,8 @@ const store = useCoffeeStore();
             <input type="date" v-model="store.filters.dateTo" class="select" />
         </div>
 
-        <div class="filter-group">
-            <button class="reset-button" @click="store.resetFilters">
-                Сбросить фильтры
-            </button>
-        </div>
+        <button class="reset-button" @click="store.resetFilters">
+            Сбросить фильтры
+        </button>
     </section>
 </template>
