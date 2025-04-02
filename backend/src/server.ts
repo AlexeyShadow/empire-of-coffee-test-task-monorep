@@ -35,6 +35,7 @@ const loginHandler: RequestHandler = (
     res.status(401).json({ message: AUTHORIZATION_FALSE });
   }
 
+  // Получаем список пользователей для последующей проверки
   const users = getUsers();
 
   const user = users.find((u) => u.credentials.username === username);
@@ -44,12 +45,8 @@ const loginHandler: RequestHandler = (
     user.credentials.passphrase === getPasswordHash(password) &&
     user.active
   ) {
-    console.log(user);
-
     // Принимаем легенду, что у нас всё шифруется
     const token = generateToken(user.credentials.username);
-    console.log(token);
-
     addSession(token, user.credentials.username);
     res.cookie("sessionId", token, { path: "/", httpOnly: true });
     res.status(200).end();
