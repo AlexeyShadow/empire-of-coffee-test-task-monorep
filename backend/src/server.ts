@@ -5,6 +5,7 @@ import { getPasswordHash } from "./../utils/getPasswordHash";
 import { getUsers } from "./../utils/getUsers";
 import { generateToken } from "./../utils/generateToken";
 import { addSession, removeSession } from "../data/sessions";
+import type { LoginRequestBody } from "../types/userTypes";
 
 const app = express();
 const PORT = 3001;
@@ -20,43 +21,54 @@ app.use(
 );
 app.use(cookieParser());
 
-const loginHandler: RequestHandler = (req: Request, res: Response): void => {
+/**
+ *  Аутентифицируем пользователя и устанавливаем сессию
+ */
+const loginHandler: RequestHandler = (
+  // Вероятно, тут надо использовать zod или любой аналог. Для правильной валидации формы и внешних параметров.
+  req: Request<any, any, LoginRequestBody>,
+  res: Response
+) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
     res.status(401).json({ message: AUTHORIZATION_FALSE });
-    return;
   }
 
   const users = getUsers();
 
-  const user = users?.find((u) => u.credentials.username === username);
+  const user = users.find((u) => u.credentials.username === username);
 
   if (
     user &&
     user.credentials.passphrase === getPasswordHash(password) &&
     user.active
   ) {
+    console.log(user);
+
     // Принимаем легенду, что у нас всё шифруется
-    const token = generateToken(user.username);
+    const token = generateToken(user.credentials.username);
+    console.log(token);
+
     addSession(token, user.credentials.username);
     res.cookie("sessionId", token, { path: "/", httpOnly: true });
-    res.send({ message: "Login successful!" });
-    return;
+    res.status(200).end();
   } else {
     res.status(401).json({ message: AUTHORIZATION_FALSE });
-    return;
   }
 };
 
-const logoutHandler: RequestHandler = (req: Request, res: Response): void => {
+/**
+ *  Разлогирование пользователя и удаляем сессию
+ */
+const logoutHandler: RequestHandler = (req: Request, res: Response) => {
   const token = req.cookies.sessionId;
   if (token) {
     removeSession(token);
     res.clearCookie("sessionId");
-    res.send({ message: "Logout successful!" });
+    res.status(200).end();
   } else {
-    res.status(401).json({ message: "Unauthorized" });
+    res.status(401).end();
   }
 };
 

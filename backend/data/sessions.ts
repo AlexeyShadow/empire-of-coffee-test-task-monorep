@@ -1,5 +1,5 @@
 //
-// Эмулируем хранение активной сессии в базе
+// Эмулируем хранение и работу с сессииями в базе
 
 type Session = {
   username: string;
@@ -8,13 +8,21 @@ type Session = {
 
 const activeSessions: Session[] = [];
 
+/**
+ *  Установка сессии
+ */
 const addSession = (token: string, username: string) => {
+  console.log(username);
+
   activeSessions.push({
     username,
     token,
   });
 };
 
+/**
+ *  Удаление сессии
+ */
 const removeSession = (token: string) => {
   const index = activeSessions.findIndex((session) => session.token === token);
   if (index !== -1) {
